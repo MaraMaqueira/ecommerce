@@ -116,14 +116,16 @@ La información se guarda en dos archivos:
 ## Estructura del Proyecto
 ```
 /ecommerce
-|-- /routes
-|   |-- products.js
-|   |-- carts.js
-|-- /data
-|   |-- products.json
-|   |-- carts.json
-|-- app.js
-|-- package.json
+├── data
+│   ├── carts.json
+│   └── products.json
+├── index.js
+├── package.json
+├── package-lock.json
+├── README.md
+└── routes
+   ├── carts.js
+   └── products.js
 ```
 
 ---
