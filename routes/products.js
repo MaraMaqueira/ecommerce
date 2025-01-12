@@ -19,6 +19,7 @@ const saveProducts = (products) => {
     fs.writeFileSync(filePath, JSON.stringify(products, null, 2));
 };
 
+
 router.get('/', (req, res) => {
     const products = readProducts();
     const limit = parseInt(req.query.limit);
@@ -43,13 +44,17 @@ router.post('/', (req, res) => {
     const products = readProducts();
     const { title, description, code, price, status, stock, category, thumbnails } = req.body;
 
+    const existingProduct = products.find(p => p.code === code);
+    if (existingProduct) {
+        return res.status(400).json({ error: 'Ya existe un producto con ese código' });
+    }
 
     if (!title || !description || !code || !price || !stock || !category) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios, excepto thumbnails' });
     }
 
     const newProduct = {
-        id: (Date.now()).toString(), // ID único basado en la fecha actual
+        id: (Date.now()).toString(),
         title,
         description,
         code,
@@ -75,7 +80,7 @@ router.put('/:pid', (req, res) => {
     }
 
     const updatedData = req.body;
-    const updatedProduct = { ...products[index], ...updatedData, id: products[index].id }; // Mantener el ID intacto
+    const updatedProduct = { ...products[index], ...updatedData, id: products[index].id };
     products[index] = updatedProduct;
 
     saveProducts(products);
@@ -96,4 +101,5 @@ router.delete('/:pid', (req, res) => {
 });
 
 module.exports = router;
+
 

@@ -14,7 +14,6 @@ const readCarts = () => {
     return JSON.parse(data || '[]');
 };
 
-
 const saveCarts = (carts) => {
     fs.writeFileSync(filePath, JSON.stringify(carts, null, 2));
 };
@@ -22,12 +21,10 @@ const saveCarts = (carts) => {
 
 router.post('/', (req, res) => {
     const carts = readCarts();
-
     const newCart = {
-        id: (Date.now()).toString(), 
+        id: (Date.now()).toString(),
         products: [] 
     };
-
     carts.push(newCart);
     saveCarts(carts);
     res.status(201).json(newCart);
@@ -37,11 +34,9 @@ router.post('/', (req, res) => {
 router.get('/:cid', (req, res) => {
     const carts = readCarts();
     const cart = carts.find(c => c.id === req.params.cid);
-
     if (!cart) {
         return res.status(404).json({ error: 'Carrito no encontrado' });
     }
-
     res.json(cart.products);
 });
 
@@ -49,13 +44,10 @@ router.get('/:cid', (req, res) => {
 router.post('/:cid/product/:pid', (req, res) => {
     const carts = readCarts();
     const cart = carts.find(c => c.id === req.params.cid);
-
     if (!cart) {
         return res.status(404).json({ error: 'Carrito no encontrado' });
     }
-
     const { pid } = req.params;
-
     const existingProduct = cart.products.find(p => p.product === pid);
 
     if (existingProduct) {
