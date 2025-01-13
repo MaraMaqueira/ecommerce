@@ -1,61 +1,79 @@
-# E-commerce Backend
+# Ecommerce - Real-Time Products
 
-Este es un proyecto de backend para un sistema de e-commerce, desarrollado con Node.js y Express. Incluye funcionalidades para la gestión de productos, carritos de compras, y vistas en tiempo real con WebSocket.
+Este proyecto es una aplicación de comercio electrónico en tiempo real donde los productos pueden ser agregados, eliminados y visualizados. La aplicación usa Node.js, Express, Handlebars y WebSockets para actualizar la lista de productos en tiempo real.
+
+## Tecnologías
+
+- **Node.js**: Entorno de ejecución para JavaScript en el servidor.
+- **Express**: Framework para construir aplicaciones web.
+- **Handlebars**: Motor de plantillas para generar HTML dinámico.
+- **WebSockets (Socket.io)**: Tecnología para la comunicación en tiempo real entre el cliente y el servidor.
+
+## Estructura del Proyecto
+
+El proyecto está organizado de la siguiente manera:
+
+\`\`\`
+ecommerce/
+├── app.js               # Archivo principal del servidor
+├── package.json         # Archivo de configuración de dependencias
+├── package-lock.json    # Archivo que asegura la instalación de dependencias consistentes
+├── src/
+│   ├── data/            # Archivos de datos (productos y carrito)
+│   ├── routes/          # Rutas de la API y vistas
+│   └── views/           # Archivos de vista (plantillas Handlebars)
+└── views/               # Vistas originales antes de la reestructuración
+\`\`\`
+
+## Instalación
+
+1. Clona el repositorio en tu máquina local:
+
+   \`\`\`bash
+   git clone https://github.com/MaraMaqueira/ecommerce.git
+   \`\`\`
+
+2. Navega al directorio del proyecto:
+
+   \`\`\`bash
+   cd ecommerce
+   \`\`\`
+
+3. Instala las dependencias necesarias:
+
+   \`\`\`bash
+   npm install
+   \`\`\`
+
+## Uso
+
+1. Inicia el servidor localmente:
+
+   \`\`\`bash
+   npm start
+   \`\`\`
+
+   Esto ejecutará la aplicación en \`http://localhost:3000\`.
+
+2. Visualiza y actualiza productos en tiempo real utilizando la interfaz web proporcionada.
 
 ## Funcionalidades
 
-- **Gestión de productos**:
-  - Crear, leer, actualizar y eliminar productos.
-  - Filtrar productos por cantidad con un límite opcional.
-  
-- **Gestión de carritos**:
-  - Crear nuevos carritos.
-  - Añadir productos a carritos existentes.
-  - Consultar los productos de un carrito específico.
+- **Visualización en tiempo real**: Los productos se muestran en tiempo real gracias a Socket.io, lo que permite agregar o eliminar productos y que la interfaz se actualice sin necesidad de recargar la página.
+- **Agregar productos**: Los productos pueden ser agregados a través de un formulario en la interfaz.
+- **Eliminar productos**: Los productos pueden ser eliminados mediante su índice.
 
-- **Vistas dinámicas**:
-  - Página principal con lista de productos.
-  - Vista de productos en tiempo real utilizando WebSocket.
+## Contribuciones
 
-## Tecnologías utilizadas
+Si deseas contribuir a este proyecto, por favor, sigue estos pasos:
 
-- Node.js
-- Express
-- Handlebars (para plantillas)
-- WebSocket (Socket.IO)
-- JSON para persistencia de datos
-
-## Estructura del proyecto
-
-```plaintext
-ecommerce/
-├── data/
-│   ├── carts.json
-│   └── products.json
-├── public/
-│   └── (archivos estáticos)
-├── routes/
-│   ├── carts.js
-│   ├── products.js
-│   └── views.router.js
-├── views/
-│   ├── home.handlebars
-│   ├── realTimeProducts.handlebars
-│   └── layouts/
-│       └── main.handlebars
-├── .gitignore
-├── package.json
-├── index.js
-└── README.md
----
-```
-## Autor
-Mara Maqueira  
-[GitHub Profile](https://github.com/MaraMaqueira)
-
----
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (\`git checkout -b feature/nueva-funcionalidad\`).
+3. Realiza los cambios y haz un commit (\`git commit -am 'Agregada nueva funcionalidad'\`).
+4. Haz push a tu rama (\`git push origin feature/nueva-funcionalidad\`).
+5. Abre un pull request.
 
 ## Licencia
-Este proyecto está bajo la Licencia MIT.
 
+Este proyecto está bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
 
