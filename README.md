@@ -1,3 +1,6 @@
+
+
+```
 # Ecommerce - Real-Time Products
 
 Este proyecto es una aplicación de comercio electrónico en tiempo real donde los productos pueden ser agregados, eliminados y visualizados. La aplicación usa Node.js, Express, Handlebars y WebSockets para actualizar la lista de productos en tiempo real.
@@ -13,47 +16,57 @@ Este proyecto es una aplicación de comercio electrónico en tiempo real donde l
 
 El proyecto está organizado de la siguiente manera:
 
-\`\`\`
+```
 ecommerce/
 ├── app.js               # Archivo principal del servidor
 ├── package.json         # Archivo de configuración de dependencias
 ├── package-lock.json    # Archivo que asegura la instalación de dependencias consistentes
-├── src/
+├── README.md            # Este archivo
+├── src/                 
 │   ├── data/            # Archivos de datos (productos y carrito)
+│   │   ├── carts.json   # Datos del carrito
+│   │   └── products.json # Datos de los productos
 │   ├── routes/          # Rutas de la API y vistas
+│   │   ├── carts.js     # Rutas para el carrito
+│   │   ├── products.js  # Rutas para los productos
+│   │   └── views.router.js # Rutas para las vistas
 │   └── views/           # Archivos de vista (plantillas Handlebars)
+│       ├── layouts/     # Plantillas base
+│       │   └── main.handlebars # Plantilla principal
+│       ├── home.handlebars    # Vista de inicio
+│       └── realTimeProducts.handlebars # Vista de productos en tiempo real
 └── views/               # Vistas originales antes de la reestructuración
-\`\`\`
+```
 
 ## Instalación
 
 1. Clona el repositorio en tu máquina local:
 
-   \`\`\`bash
+   ```
    git clone https://github.com/MaraMaqueira/ecommerce.git
-   \`\`\`
+   ```
 
 2. Navega al directorio del proyecto:
 
-   \`\`\`bash
+   ```
    cd ecommerce
-   \`\`\`
+   ```
 
 3. Instala las dependencias necesarias:
 
-   \`\`\`bash
+   ```
    npm install
-   \`\`\`
+   ```
 
 ## Uso
 
 1. Inicia el servidor localmente:
 
-   \`\`\`bash
+   ```
    npm start
-   \`\`\`
+   ```
 
-   Esto ejecutará la aplicación en \`http://localhost:3000\`.
+   Esto ejecutará la aplicación en `http://localhost:3000`.
 
 2. Visualiza y actualiza productos en tiempo real utilizando la interfaz web proporcionada.
 
@@ -68,12 +81,14 @@ ecommerce/
 Si deseas contribuir a este proyecto, por favor, sigue estos pasos:
 
 1. Haz un fork del repositorio.
-2. Crea una nueva rama (\`git checkout -b feature/nueva-funcionalidad\`).
-3. Realiza los cambios y haz un commit (\`git commit -am 'Agregada nueva funcionalidad'\`).
-4. Haz push a tu rama (\`git push origin feature/nueva-funcionalidad\`).
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza los cambios y haz un commit (`git commit -am 'Agregada nueva funcionalidad'`).
+4. Haz push a tu rama (`git push origin feature/nueva-funcionalidad`).
 5. Abre un pull request.
 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
+```
+
 
