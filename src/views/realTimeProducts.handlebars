@@ -8,11 +8,9 @@
     <script>
         const socket = io();
 
-
         socket.on('updateProducts', (products) => {
             const productsList = document.getElementById('productsList');
-            productsList.innerHTML = '';  
-
+            productsList.innerHTML = ''; // Limpiar la lista actual
             products.forEach((product, index) => {
                 const li = document.createElement('li');
                 li.textContent = `${index + 1}. ${product.title} - $${product.price}`;
@@ -24,53 +22,36 @@
         function addProduct() {
             const productInput = document.getElementById('productInput');
             const priceInput = document.getElementById('priceInput');
-            const productName = productInput.value.trim();
-            const productPrice = parseFloat(priceInput.value.trim());
+            const title = productInput.value.trim();
+            const price = parseFloat(priceInput.value.trim());
 
-            if (productName && !isNaN(productPrice) && productPrice >= 0) {
-
-                socket.emit('addProduct', { title: productName, price: productPrice });
+            if (title && !isNaN(price)) {
+                socket.emit('addProduct', { title, price });
                 productInput.value = '';
-                priceInput.value = ''; 
-            } else {
-                alert('Por favor, ingrese un producto válido con un precio adecuado.');
+                priceInput.value = '';
             }
         }
-
 
         function deleteProduct() {
             const productIndex = document.getElementById('deleteIndex').value.trim();
             const index = parseInt(productIndex, 10);
-
             if (!isNaN(index)) {
-
-                socket.emit('deleteProduct', index - 1); 
-            } else {
-                alert('Por favor, ingrese un índice válido.');
+                socket.emit('deleteProduct', index - 1); // Convertir a índice basado en 0
             }
         }
     </script>
 </head>
 <body>
     <h1>Real-Time Products</h1>
-    
-    <ul id="productsList">
-     
-    </ul>
-
-
+    <ul id="productsList"></ul>
     <div>
-        <input id="productInput" type="text" placeholder="Nombre del producto" />
-        <input id="priceInput" type="number" placeholder="Precio" min="0" />
-        <button onclick="addProduct()">Agregar Producto</button>
+        <input id="productInput" type="text" placeholder="Agregar producto (nombre)" />
+        <input id="priceInput" type="number" placeholder="Agregar producto (precio)" />
+        <button onclick="addProduct()">Agregar</button>
     </div>
-
-
     <div>
         <input id="deleteIndex" type="number" placeholder="Índice para eliminar" />
-        <button onclick="deleteProduct()">Eliminar Producto</button>
+        <button onclick="deleteProduct()">Eliminar</button>
     </div>
 </body>
 </html>
-
-

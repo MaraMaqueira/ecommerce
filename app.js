@@ -4,56 +4,54 @@ const path = require('path');
 const http = require('http');
 const { Server } = require('socket.io');
 
+const productsRouter = require('./src/routes/products');
+const cartsRouter = require('./src/routes/carts');
+const viewsRouter = require('./src/routes/views.router');
+const productsData = require('./src/data/products.json'); 
+
 const app = express();
-
-//Handlebars
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
-
-// Middleware
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Rutas
-const viewsRouter = require('./routes/views.router');
-app.use('/', viewsRouter);
-
-//Servidor HTTP y WebSocket
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Lista de productos 
-let products = [];
+const PORT = 3000;
 
-//WebSocket
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'src/views'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use('/api/products', productsRouter);
+app.use('/api/carts', cartsRouter);
+app.use('/', viewsRouter);
+
+
+let products = productsData; 
+
 io.on('connection', (socket) => {
-  console.log('Nuevo cliente conectado');
+  console.log('Cliente conectado');
 
-  // Emitir lista de productos
   socket.emit('updateProducts', products);
 
-  // Agregar un nuevo producto
-  socket.on('addProduct', (product) => {
-    products.push(product);
-    io.emit('updateProducts', products); 
+
+  socket.on('addProduct', (newProduct) => {
+    products.push(newProduct);
+    io.emit('updateProducts', products);
   });
 
-  // Eliminar un producto
+
   socket.on('deleteProduct', (index) => {
-    products.splice(index, 1);
-    io.emit('updateProducts', products); 
-  });
-
-  // Cliente desconectado
-  socket.on('disconnect', () => {
-    console.log('Cliente desconectado');
+    if (index >= 0 && index < products.length) {
+      products.splice(index, 1);
+      io.emit('updateProducts', products);
+    }
   });
 });
 
-// Arrancar servidor
-const PORT = 3000;
+
 server.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
