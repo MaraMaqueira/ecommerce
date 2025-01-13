@@ -1,6 +1,4 @@
 
-
-```
 # Ecommerce - Real-Time Products
 
 Este proyecto es una aplicación de comercio electrónico en tiempo real donde los productos pueden ser agregados, eliminados y visualizados. La aplicación usa Node.js, Express, Handlebars y WebSockets para actualizar la lista de productos en tiempo real.
@@ -89,6 +87,6 @@ Si deseas contribuir a este proyecto, por favor, sigue estos pasos:
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
-```
+
 
 
